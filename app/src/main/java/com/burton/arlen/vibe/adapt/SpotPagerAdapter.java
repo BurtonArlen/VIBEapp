@@ -12,6 +12,7 @@ import com.burton.arlen.vibe.ui.SpotDetailFragment;
 
 import java.util.ArrayList;
 
+
 public class SpotPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Spot> mSpots;
 

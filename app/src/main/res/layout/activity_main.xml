@@ -19,9 +19,9 @@
         android:id="@+id/imageViewLogo"
         android:src="@drawable/logored"
         android:scaleType="fitCenter"
-        android:layout_above="@+id/findSpotsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="79dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70sp"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="match_parent"
@@ -30,11 +30,21 @@
         android:id="@+id/findSpotsButton"
         android:background="#000000"
         android:visibility="visible"
-        android:layout_above="@+id/savedSpotsButton"
+        android:textColor="#fff"
+        android:layout_below="@+id/imageViewLogo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:textColor="#fff"/>
+        android:layout_marginTop="100sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c30000"
+        android:layout_below="@+id/findSpotsButton"
+        android:id="@+id/textView"
+        android:visibility="visible"
+        android:layout_marginBottom="5sp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -44,9 +54,16 @@
         android:background="#000000"
         android:visibility="visible"
         android:textColor="#fff"
-        android:layout_above="@+id/imageViewPower"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c30000"
+        android:layout_below="@id/savedSpotsButton"
+        android:visibility="visible"/>
 
     <ImageView
         android:layout_width="350sp"

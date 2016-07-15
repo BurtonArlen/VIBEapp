@@ -8,10 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.burton.arlen.vibe.Constants;
 import com.burton.arlen.vibe.R;
@@ -27,10 +27,10 @@ import org.parceler.Parcels;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
 public class SpotDetailFragment extends Fragment implements View.OnClickListener {
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
-
     @Bind(R.id.spotImageView) ImageView mImageLabel;
     @Bind(R.id.spotNameTextView) TextView mNameLabel;
     @Bind(R.id.cuisineTextView) TextView mCategoriesLabel;
@@ -38,7 +38,7 @@ public class SpotDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
     @Bind(R.id.phoneTextView) TextView mPhoneLabel;
     @Bind(R.id.addressTextView) TextView mAddressLabel;
-    @Bind(R.id.saveSpotButton) TextView mSaveSpotButton;
+    @Bind(R.id.saveSpotButton) Button mSaveSpotButton;
 
     private Spot mSpot;
 
@@ -83,45 +83,36 @@ public class SpotDetailFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View v) {
-
-        if (v == mWebsiteLabel) {
+    public void onClick(View view) {
+        if (view == mWebsiteLabel) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(mSpot.getWebsite()));
             startActivity(webIntent);
         }
-
-        if (v == mPhoneLabel) {
+        if (view == mPhoneLabel) {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
                     Uri.parse("tel:" + mSpot.getPhone()));
             startActivity(phoneIntent);
         }
-
-        if (v == mAddressLabel) {
+        if (view == mAddressLabel) {
             Intent mapIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("geo:" + mSpot.getLatitude()
                             + "," + mSpot.getLongitude()
                             + "?q=(" + mSpot.getName() + ")"));
             startActivity(mapIntent);
         }
-
-        if (v == mSaveSpotButton) {
+        if (view == mSaveSpotButton) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-
             DatabaseReference spotRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
                     .child(uid);
-
             DatabaseReference pushRef = spotRef.push();
             String pushId = pushRef.getKey();
             mSpot.setPushId(pushId);
             pushRef.setValue(mSpot);
-
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
-
     }
-
 }

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,14 +25,16 @@ import com.burton.arlen.vibe.serve.YelpServe;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static com.burton.arlen.vibe.serve.YelpServe.findSpots;
+
 public class SpotListActivity extends AppCompatActivity {
+    public static final String TAG = SpotListActivity.class.getSimpleName();
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
@@ -73,19 +76,16 @@ public class SpotListActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
             @Override
             public boolean onQueryTextSubmit(String query) {
-                addToSharedPreferences(query);
+                addToSharedReferences(query);
                 getSpots(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
-
         });
 
         return true;
@@ -97,9 +97,8 @@ public class SpotListActivity extends AppCompatActivity {
     }
 
     private void getSpots(String location) {
-        final YelpServe yelpService = new YelpServe();
-
-        yelpService.findSpots(location, new Callback() {
+        final YelpServe yelpServe = new YelpServe();
+        findSpots(location, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -108,10 +107,9 @@ public class SpotListActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
-                mSpots = yelpService.processResults(response);
+                mSpots = yelpServe.processResults(response);
 
                 SpotListActivity.this.runOnUiThread(new Runnable() {
-
                     @Override
                     public void run() {
                         mAdapter = new SpotListAdapter(getApplicationContext(), mSpots);
@@ -120,14 +118,14 @@ public class SpotListActivity extends AppCompatActivity {
                                 new LinearLayoutManager(SpotListActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
+
                     }
                 });
             }
         });
     }
 
-    private void addToSharedPreferences(String location) {
+    private void addToSharedReferences(String location) {
         mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
-
 }

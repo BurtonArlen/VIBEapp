@@ -28,11 +28,10 @@ import butterknife.ButterKnife;
 public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.SpotViewHolder> {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
-
     private ArrayList<Spot> mSpots = new ArrayList<>();
     private Context mContext;
 
-    public SpotListAdapter(Context context, ArrayList<Spot> spots) {
+    public SpotListAdapter(Context context, ArrayList<Spot> spots){
         mContext = context;
         mSpots = spots;
     }
@@ -65,33 +64,30 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.SpotVi
         public SpotViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
             mContext = itemView.getContext();
             itemView.setOnClickListener(this);
         }
 
-        public void bindSpot(Spot spot) {
 
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, SpotDetailActivity.class);
+            intent.putExtra("position", itemPosition + "");
+            intent.putExtra("spots", Parcels.wrap(mSpots));
+            mContext.startActivity(intent);
+        }
+
+        public void bindSpot(Spot spot) {
             Picasso.with(mContext)
                     .load(spot.getImageUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
                     .into(mSpotImageView);
-
             mNameTextView.setText(spot.getName());
             mCategoryTextView.setText(spot.getCategories().get(0));
             mRatingTextView.setText("Rating: " + spot.getRating() + "/5");
         }
 
-        @Override
-        public void onClick(View v) {
-            int itemPosition = getLayoutPosition();
-
-            Intent intent = new Intent(mContext, SpotDetailActivity.class);
-            intent.putExtra("position", itemPosition + "");
-            intent.putExtra("spots", Parcels.wrap(mSpots));
-
-            mContext.startActivity(intent);
-        }
     }
 }
