@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.SpotListActivity" />
         <activity android:name=".ui.SpotDetailActivity" />
         <activity android:name=".ui.CreateAccountActivity"></activity>
     </application>

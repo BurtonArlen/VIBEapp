@@ -25,7 +25,7 @@ import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 public class YelpServe {
 
-    public static void findRestaurants(String location, Callback callback) {
+    public static void findSpots(String location, Callback callback) {
         OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(Constants.YELP_CONSUMER_KEY, Constants.YELP_CONSUMER_SECRET);
         consumer.setTokenWithSecret(Constants.YELP_TOKEN, Constants.YELP_TOKEN_SECRET);
 
@@ -46,7 +46,7 @@ public class YelpServe {
     }
 
     public ArrayList<Spot> processResults(Response response) {
-        ArrayList<Spot> restaurants = new ArrayList<>();
+        ArrayList<Spot> spots = new ArrayList<>();
 
         try {
             String jsonData = response.body().string();
@@ -54,32 +54,32 @@ public class YelpServe {
                 JSONObject yelpJSON = new JSONObject(jsonData);
                 JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
                 for (int i = 0; i < businessesJSON.length(); i++) {
-                    JSONObject restaurantJSON = businessesJSON.getJSONObject(i);
-                    String name = restaurantJSON.getString("name");
-                    String phone = restaurantJSON.optString("display_phone", "Phone not available");
-                    String website = restaurantJSON.getString("url");
-                    double rating = restaurantJSON.getDouble("rating");
-                    String imageUrl = restaurantJSON.getString("image_url");
-                    double latitude = restaurantJSON.getJSONObject("location")
+                    JSONObject spotJSON = businessesJSON.getJSONObject(i);
+                    String name = spotJSON.getString("name");
+                    String phone = spotJSON.optString("display_phone", "Phone not available");
+                    String website = spotJSON.getString("url");
+                    double rating = spotJSON.getDouble("rating");
+                    String imageUrl = spotJSON.getString("image_url");
+                    double latitude = spotJSON.getJSONObject("location")
                             .getJSONObject("coordinate").getDouble("latitude");
-                    double longitude = restaurantJSON.getJSONObject("location")
+                    double longitude = spotJSON.getJSONObject("location")
                             .getJSONObject("coordinate").getDouble("longitude");
                     ArrayList<String> address = new ArrayList<>();
-                    JSONArray addressJSON = restaurantJSON.getJSONObject("location")
+                    JSONArray addressJSON = spotJSON.getJSONObject("location")
                             .getJSONArray("display_address");
                     for (int y = 0; y < addressJSON.length(); y++) {
                         address.add(addressJSON.get(y).toString());
                     }
 
                     ArrayList<String> categories = new ArrayList<>();
-                    JSONArray categoriesJSON = restaurantJSON.getJSONArray("categories");
+                    JSONArray categoriesJSON = spotJSON.getJSONArray("categories");
 
                     for (int y = 0; y < categoriesJSON.length(); y++) {
                         categories.add(categoriesJSON.getJSONArray(y).get(0).toString());
                     }
-                    Spot restaurant = new Spot(name, phone, website, rating,
+                    Spot spot = new Spot(name, phone, website, rating,
                             imageUrl, address, latitude, longitude, categories);
-                    restaurants.add(restaurant);
+                    spots.add(spot);
                 }
             }
         } catch (IOException e) {
@@ -87,7 +87,7 @@ public class YelpServe {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return restaurants;
+        return spots;
     }
 
 
