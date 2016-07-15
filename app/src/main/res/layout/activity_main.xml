@@ -19,7 +19,7 @@
         android:id="@+id/imageViewLogo"
         android:src="@drawable/logored"
         android:scaleType="fitCenter"
-        android:layout_above="@+id/findRestaurantsButton"
+        android:layout_above="@+id/findSpotsButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="79dp" />
 
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="F i n d   Y o u r   S p o t"
-        android:id="@+id/findRestaurantsButton"
+        android:id="@+id/findSpotsButton"
         android:background="#000000"
         android:visibility="visible"
         android:layout_above="@+id/savedSpotButton"
