@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "346389120369",
+    "firebase_url": "https://vibe-6e925.firebaseio.com",
+    "project_id": "vibe-6e925",
+    "storage_bucket": "vibe-6e925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346389120369:android:1b8613c1135da89d",
+        "android_client_info": {
+          "package_name": "com.burton.arlen.vibe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346389120369-u4vkr2iau43p1eb0us5ss1n1o5uo23it.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDETc_W0N3-ox-qjJcd3MYWsVcLyPziBAU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
