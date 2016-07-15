@@ -19,31 +19,34 @@
         android:id="@+id/imageViewLogo"
         android:src="@drawable/logored"
         android:scaleType="fitCenter"
-        android:layout_marginTop="54dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/findRestaurantsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="79dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find Your Spot"
+        android:text="F i n d   Y o u r   S p o t"
         android:id="@+id/findRestaurantsButton"
-        android:background="@color/colorAccent"
+        android:background="#000000"
         android:visibility="visible"
         android:layout_above="@+id/savedSpotButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Spots"
+        android:text="M y   S p o t s"
         android:id="@+id/savedSpotButton"
-        android:background="@color/colorAccent"
+        android:background="#000000"
         android:visibility="visible"
+        android:textColor="#fff"
         android:layout_above="@+id/imageViewPower"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="350sp"
