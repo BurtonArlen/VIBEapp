@@ -54,7 +54,7 @@
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dp"
             android:textColor="@android:color/black"
-            android:textColorHint="#000000"
+            android:textColorHint="#eee"
             android:textSize="20sp" />
 
 
