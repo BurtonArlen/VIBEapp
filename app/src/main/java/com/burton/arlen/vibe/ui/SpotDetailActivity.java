@@ -30,5 +30,6 @@ public class SpotDetailActivity extends AppCompatActivity {
         adapterViewPager = new SpotPagerAdapter(getSupportFragmentManager(), mSpots);
         mViewPager.setAdapter(adapterViewPager);
         mViewPager.setCurrentItem(startingPosition);
+
     }
 }

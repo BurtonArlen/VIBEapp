@@ -106,7 +106,7 @@ public class SpotDetailFragment extends Fragment implements View.OnClickListener
             String uid = user.getUid();
             DatabaseReference spotRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
+                    .getReference(Constants.FIREBASE_CHILD_SPOTS)
                     .child(uid);
             DatabaseReference pushRef = spotRef.push();
             String pushId = pushRef.getKey();

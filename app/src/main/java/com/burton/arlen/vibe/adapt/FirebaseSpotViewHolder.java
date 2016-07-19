@@ -59,7 +59,7 @@ public class FirebaseSpotViewHolder extends RecyclerView.ViewHolder implements V
     @Override
     public void onClick(View view) {
         final ArrayList<Spot> spots = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_SPOTS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override

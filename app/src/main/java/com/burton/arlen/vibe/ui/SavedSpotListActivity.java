@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,25 +35,20 @@ public class SavedSpotListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spots);
         ButterKnife.bind(this);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
-        mSpotReference = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
-                .child(uid);
-
         setUpFirebaseAdapter();
     }
 
     private void setUpFirebaseAdapter() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        Query query = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_SPOTS).child(uid);
+
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Spot, FirebaseSpotViewHolder>
                 (Spot.class, R.layout.spot_list_item, FirebaseSpotViewHolder.class,
                         mSpotReference) {
 
             @Override
-            protected void populateViewHolder(FirebaseSpotViewHolder viewHolder,
-                                              Spot model, int position) {
+            protected void populateViewHolder(FirebaseSpotViewHolder viewHolder, Spot model, int position) {
                 viewHolder.bindSpot(model);
             }
         };
